@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { Sum } from './src/pages/Sum';
+import { Message } from './src/pages/Message';
+import { Acceleration } from './src/pages/Acceleration';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello, prática 1!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Atividade 1" component={Sum} />
+        <Tab.Screen
+          name="Atividade 2 - wrapper"
+          component={Message}
+          options={{ header: () => null, tabBarLabel: 'Atividade 2' }}
+        />
+        <Tab.Screen
+          name="Atividade 3 - wrapper"
+          component={Acceleration}
+          options={{
+            header: () => null,
+            tabBarLabel: 'Atividade 3',
+            unmountOnBlur: true,
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
